@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Piano</title>
+    <link rel="stylesheet" type="text/css" href="../css/style_piano.css">
+    <script src="../js/Libraries/Tone.js"> </script>
+    <script src="../js/Libraries/anime.es.js"></script>
+    <script src="../js/Libraries/anime.js"></script>
+    <script src="../js/Libraries/anime.min.js"></script>
+    <script src="../js/piano.js"></script>
+    <script src="../js/Games/Generate_Tone.js"></script>
+    <script src="../js/inicialization.js" defer></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
+</head>
+<body>
+<button class="button_back" id="btn5" type="button" value="4" onclick="button5()" style="display: none">&larr;</button>
+<div class="container" id="container">
+    <div class="board1" id="board1">
+        <h5>Vyber hru</h5>
+        <button class="game_one" id="game_one" type="button" value="0" onclick=" game_one_button()"> <i class='fas fa-music' style='font-size:24px'></i></button>
+    </div>
+    <div class="board2" id="board2">
+        <h5>Vybral si hudnobny nastroj klavir</h5>
+        <button class="button_level" id="btn1" type="button" value="1" onclick="button1()">1</button>
+        <button class="button_level" id="btn2" type="button" value="2" onclick="button2()">2</button>
+        <button class="button_level" id="btn3" type="button" value="3" onclick="button3()" >3</button>
+        <button class="button_level" id="btn4" type="button" value="4" onclick="button4()">4</button>
+    </div>
+</div>
+<div  class="container_middle" id="container_middle">
+    <i class='fas fa-volume-off' id="volume_off"></i>
+    <i class='fas fa-volume-down' id="volume_down"></i>
+    <i class='fas fa-volume-up' id="volume_up"></i>
+    <div class="middle_emojis" id="middle_emojis">
+        <i class='emoji_heart' id="emoji_heart">&#128525;</i>
+        <i class='emoji_sad' id="emoji_sad">&#128532;</i>
+        <button id="button_repeat" class="button_repeat">Button <i class="fa fa-repeat" id="repeat"></i></button>
+    </div>
+</div>
+<div id="container_down">
+
+</div>
+</body>
+<script>
+
+</script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="css/style_index.css">
+</head>
+<body>
+<div class="container">
+    <div class="board">
+        <h4>Vítaj na stránke</h4>
+        <label for="instruments">Vyber si hudobný nástroj</label>
+        <select name="instruments" id="instruments">
+            <option value=" "> </option>
+            <option value="piano" id="piano">Klavír</option>
+        </select>
+        <button onclick="selected()">Vyber</button>
+    </div>
+</div>
+<script>
+
+
+    function selected() {
+        if(document.getElementById("piano").selected === true){
+            window.location.href = "/html/piano.html";
+
+        }
+    }
+</script>
+
+</body>
+</html>

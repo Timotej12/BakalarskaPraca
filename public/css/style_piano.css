@@ -1,0 +1,162 @@
+body{
+    background-color: cyan;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    background-color: #FFF8DC;
+    width: 60%;
+    border: 5px solid black;
+    border-radius: 30px;
+    padding: 20px;
+    text-align: center;
+    margin: 20px auto;
+
+}
+.container_middle{
+    display: none;
+    width: 20%;
+    margin: 50px auto;
+}
+.board1{
+    font-size: 20px;
+}
+.board2{
+    font-size: 20px;
+    display: none;
+}
+.text_white_note{
+    margin: 150px auto 0;
+}
+.text_black_note{
+    margin: 60px auto 0;
+}
+
+#container_down {
+    position: fixed;
+    display: flex;
+    width:1200px;
+    height:300px;
+    bottom:0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.whitenote{
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    display: flex;
+    background: #fff;
+    width: 80px;
+    height: 280px;
+    border: 1px solid black;
+    border-radius: 0 0 5px 5px;
+    margin: 0 -2px;
+    transition: background-color 50ms ease,box-shadow 50ms ease;
+}
+.blacknote {
+    position: absolute;
+    height: 130px;
+    width: 30px;
+    z-index: 99;
+    margin: 0;
+    background-color: black;
+    color: white;
+    top: 0;
+
+}
+.whitenote:active{
+    background-color: gray;
+    height: 270px;
+}
+.blacknote:active{
+    background-color: gray;
+    height: 125px;
+}
+
+.whitenote0,.whitenote1,.whitenote2,.whitenote3,.whitenote4,.whitenote5, .whitenote6, .whitenote7{
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    display: flex;
+    background: #fff;
+    width: 80px;
+    height: 280px;
+    border: 1px solid black;
+    border-radius: 0 0 5px 5px;
+    margin: 0 -2px;
+    transition: background-color 50ms ease,box-shadow 50ms ease;
+
+}
+
+.whitenote0{background-color: darkolivegreen}.whitenote1{background-color: chocolate} .whitenote2{background-color: brown} .whitenote3{background-color: darkgreen}
+.whitenote4{background-color: burlywood} .whitenote5{background-color: teal} .whitenote6{background-color: aquamarine} .whitenote7{background-color: darkmagenta}
+
+.whitenote0:active,.whitenote1:active,.whitenote2:active,.whitenote3:active,.whitenote4:active,.whitenote5:active, .whitenote6:active, .whitenote7:active{
+    background-color: gray;
+    height: 270px;
+}
+
+.blacknote0,.blacknote1,.blacknote2,.blacknote3,.blacknote4,.blacknote5, .blacknote6, .blacknote7{
+    position: absolute;
+    height: 130px;
+    width: 30px;
+    z-index: 99;
+    margin: 0;
+    background-color: black;
+    color: white;
+    top: 0;
+}
+.blacknote0:active,.blacknote1:active,.blacknote2:active,.blacknote3:active,.blacknote4:active,.blacknote5:active, .blacknote6:active, .blacknote7:active{
+    background-color: gray;
+    height: 125px;
+}
+
+.game_one{
+    background-image: url("../obrazky/obrazok1.jpg");
+    width: 50px;
+    height: 50px;
+}
+.button_level{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.button_back{
+    float: left;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.fa-volume-up, .fa-volume-off, .fa-volume-down{
+    display: none;
+    width: 60%;
+    font-size: 75px;
+    margin: 20px auto auto;
+}
+.emoji_heart, .emoji_sad{
+    display: none;
+    font-size: 75px;
+    margin: 20px auto auto;
+}
+.button_repeat{
+    display: none;
+    float: left;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
