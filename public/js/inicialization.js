@@ -1,3 +1,4 @@
+
 // js classes
 let created = false;
 let piano1_colorful = new Colorful_Piano(['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'])
@@ -14,39 +15,46 @@ let board2 = document.getElementById("board2");
 let container_down = document.getElementById('container_down');
 let container_middle = document.getElementById('container_middle');
 let btn_arrow = document.getElementById('btn5');
-let game_one = document.getElementById('game_one');
+let middle_icon = document.getElementById('middle_icons');
+let stars = document.getElementById('stars');
+
+
 let volume_off = document.getElementById('volume_off');
 let volume_up = document.getElementById('volume_up');
 let volume_down = document.getElementById('volume_down');
 let emoji_heart = document.getElementById('emoji_heart');
 let emoji_sad = document.getElementById('emoji_sad');
+let tucniak_klavir = document.getElementById('tucniak_klavir');
+let pes_klavir = document.getElementById('pes_klavir');
+
+//buttons id
+let button_again = document.getElementById('button_again');
+let button_close = document.getElementById('button_close');
 
 //booleans atd
 let button_arrow_active = false;
-let button_repeat_action = false;
 let button_game_one = false;
+
 
 
 //buttons-----------------------------------------------------
 function button1() {
     if(!created) {
-        console.log("pica")
         btn_arrow.style.display = 'block';
         container.style.display = "none";
         created = true;
         piano1_colorful.create_piano();
-        if(button_game_one){play_game_one(piano1_colorful);}
+        if(button_game_one){play_game_one(piano1_colorful,0);}
     }
 }
 
 function button2() {
     if (!created) {
-        console.log("huba")
         btn_arrow.style.display = 'block';
         container.style.display = "none";
         created = true;
         piano1_default.create_piano();
-        if(button_game_one){play_game_one(piano1_default);}
+        if(button_game_one){play_game_one(piano1_default,0);}
 
     }
 }
@@ -57,7 +65,7 @@ function button3() {
         container.style.display = "none";
         created = true;
         piano2_colorful.create_piano();
-        if(button_game_one){play_game_one(piano2_colorful);}
+        if(button_game_one){play_game_one(piano2_colorful,0);}
 
     }
 }
@@ -68,30 +76,18 @@ function button4() {
         container.style.display = "none";
         created = true;
         piano2_default.create_piano();
-        if(button_game_one){play_game_one(piano2_default);}
+        if(button_game_one){play_game_one(piano2_default,0);}
     }
 }
 function button5(){
     button_arrow_active = true;
     if( container.style.display === 'none') {
-        container.style.display = "block"
-        board2.style.display = "block";
-        btn_arrow.style.display = 'block';
-        document.getElementById('container_down').innerHTML = "";
-        created = false;
-    }
-    else if(container.style.display === 'block' && board2.style.display === 'block' ) {
-        board2.style.display = 'none';
-        btn_arrow.style.display = 'block';
-        board1.style.display = 'block';
-        created = false;
-    }
-    else if(container.style.display === 'block' && board2.style.display === 'block' && board1.style.display === 'none') {
-        board2.style.display = 'none';
-        board1.style.display = 'block';
-        created = false;
+        piano_level_menu();
     }
 
+    else if(container.style.display === 'block' && board2.style.display === 'block' ) {
+        piano_game_menu();
+    }
 }
 function game_one_button(){
     button_game_one = true;
@@ -100,13 +96,19 @@ function game_one_button(){
    btn_arrow.style.display = "block";
 }
 
+
+
 //-------------------------------------------------------------
 
 //functions----------------------------------------------------
 //Game generated tone------------------------------------------
-function play_game_one(piano){
+function play_game_one(piano, rounds_number) {
+    middle_icon.style.display = 'none';
+    let random_number = Math.floor(Math.random() * 4);
+    if (random_number < 2) display_tucniak_klavir(true);
+    else display_pes_klavir(true);
     button_arrow_active = false;
-    let rounds = 0;
+    let rounds = rounds_number;
     let number = 1;
     let interval =  setInterval(function (){
             if(number > 3) number = 1;
@@ -114,16 +116,22 @@ function play_game_one(piano){
             number += 1;}
         , 500);
     loopgame();
+
     function loopgame(){
-        console.log("Pica huba rit")
         if(button_arrow_active || rounds >= 5){
             close_img_and_interval(interval);
             return;
         }
-        set_timeout(piano, interval);
-        rounds++;
-        if(rounds < 6){
-            setTimeout(loopgame, 7000);
+        if(rounds === 0){
+            set_timeout(piano, interval);
+            rounds++;
+            setTimeout(loopgame, 8500);
+        }
+        else{
+            close_img_and_interval(interval);
+            middle_icon.style.display = 'flex';
+            button_again.onclick = function (){rounds = 0 ;play_game_one(piano, rounds)}
+            button_close.onclick = function (){piano_level_menu();}
         }
     }
 }
@@ -132,7 +140,7 @@ function set_timeout(piano, interval){
         close_img_and_interval(interval);
         return;
     }
-    setTimeout( () => generate_random_tone(piano, interval), 2000);
+    setTimeout( () => generate_random_tone(piano, interval), 3000);
 }
 function generate_random_tone(piano, interval){
     if(button_arrow_active){
@@ -146,23 +154,21 @@ function generate_random_tone(piano, interval){
 }
 
 function compare_generated_and_clicked(note, piano, interval){
-    if(button_arrow_active){
-        close_img_and_interval(interval);
-        return;
-    }
+    close_img_and_interval(interval);
     if(piano.return_played_tone() !== undefined){
         if(piano.return_played_tone() === note){
             display_emoji_heart(true);
-            setTimeout(function (){display_emoji_heart(false)}, 2000);
+            animate_stars();
+            setTimeout(function (){display_emoji_heart(false)}, 1500);
         }
         else {
             display_emoji_sad(true);
-            setTimeout(function (){ display_emoji_sad(false);}, 2000);
+            setTimeout(function (){ display_emoji_sad(false);}, 1500);
         }
     }
     else {
         display_emoji_sad(true);
-        setTimeout(function (){ display_emoji_sad(false);}, 2000);
+        setTimeout(function (){ display_emoji_sad(false);}, 1500);
     }
 }
 function display_emoji_heart(display){
@@ -203,14 +209,110 @@ function set_sound_img(number_of_img, interval){
     }
 }
 function close_img_and_interval(interval){
+    display_tucniak_klavir(false);
+    display_pes_klavir(false);
     clearInterval(interval);
     interval = null;
+    stars.innerHTML = '';
+    middle_icon.style.display = 'none'
     volume_off.style.display = 'none';
     volume_up.style.display = 'none';
     volume_down.style.display = 'none';
 }
+function display_middle_container(){
+    container_middle.style.display = 'block';
+}
+function display_container(){
+    created = false;
+    container.style.display = 'block';
+    container_down.innerHTML = '';
+}
+function display_board1(){
+    display_container();
+    board1.style.display = 'block';
+    board2.style.display = 'none';
+    btn_arrow.style.display = 'block';
+    created = false;
+}
+function display_board2(){
+    display_container();
+    board1.style.display = 'none';
+    board2.style.display = 'block';
+}
 
+function display_tucniak_klavir(display){
+    if(display){
+        tucniak_klavir.style.display = 'block';
+    }
+    else {
+        tucniak_klavir.style.display = 'none';
+    }
+}
+function display_pes_klavir(display){
+    if(display){
+        pes_klavir.style.display = 'block';
+    }
+    else {
+        pes_klavir.style.display = 'none';
+    }
+}
 
+function piano_level_menu(){
+    close_img_and_interval();
+    middle_icon.style.display = 'none';
+    btn_arrow.style.display = 'block';
+    document.getElementById('container_down').innerHTML = "";
+    created = false;
+    display_board2();
+}
+function piano_game_menu(){
+    display_board1();
+}
+
+function add_stars(){
+    for (var i = 0; i < 10; i++) {
+        var img = new Image();
+        img.src = "../obrazky/hviezda.png"
+        img.setAttribute('id', 'hviezda')
+        img.style.width = '30px';
+        img.style.height = '30px';
+        stars.appendChild(img)
+    }
+}
+
+function set_stars(){
+    stars.style.display = 'block';
+    const winWidth =  stars.offsetWidth;
+    const winHeight = stars.offsetHeight;
+
+    for (let i= 0; i < stars.children.length; i++ ) {
+        var thisStar = stars.children[i];
+        let randomTop = getRandomNumber(0, winHeight);
+        let randomLeft = getRandomNumber(0, winWidth);
+        thisStar.style.top = randomTop +"px";
+        thisStar.style.left = randomLeft +"px";
+    }
+}
+function getRandomNumber(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function animate_stars(){
+    add_stars();
+    set_stars()
+    stars.onanimationend = () => { stars.innerHTML = '';}
+    stars.animate(
+        [
+            // keyframes
+            { transform: 'translateY(0px)' },
+            { transform: 'translateY(-300px)' }
+        ], {
+            // timing options
+            duration: 1000,
+            iterations: 1
+        }
+    )
+}
 
 
 

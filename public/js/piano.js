@@ -7,6 +7,12 @@ class Piano{
     create_piano(){
         let note_counter = 0;
         const div_container = document.getElementById('container_down');
+        if(this.notes.length < 10){
+            div_container.style.left = '70%';
+        }
+        else{
+            div_container.style.left = '50%';
+        }
         for(let i = 0; i < this.notes.length; i++){
             const note = this.notes[i];
             this.root = document.createElement("div");
@@ -47,10 +53,10 @@ class Piano{
             }
         }
     }
-    noteDown( root) {
+    noteDown(root) {
         let synth = new Tone.PolySynth().toDestination();
         this.played_tone = root;
-        synth.triggerAttackRelease(root, "16n");
+        synth.triggerAttackRelease(root, "8n");
         event.stopPropagation();
     }
     return_played_tone(){
@@ -65,6 +71,12 @@ class Colorful_Piano extends Piano{
     create_piano() {
         let note_counter = 0;
         const div_container = document.getElementById('container_down');
+        if(this.notes.length < 10){
+            div_container.style.left = '70%';
+        }
+        else{
+            div_container.style.left = '50%';
+        }
         for(let i = 0; i < this.notes.length; i++){
             const note = this.notes[i];
             this.root = document.createElement("div");
@@ -88,7 +100,7 @@ class Colorful_Piano extends Piano{
                 text_black_note.classList.add('text_black_note');
                 text_black_note.innerHTML = '#' + note;
                 this.root = document.createElement("div");
-                this.root.classList.add('blacknote' + i);
+                this.root.classList.add('blacknote');
 
                 this.root.appendChild(text_black_note);
                 this.root.setAttribute('data-note',note + '#' + 4);
