@@ -21,6 +21,8 @@ body{
 
 }
 .container_middle{
+    text-align: center;
+    align-items: center;
     display: none;
     width: 20%;
     margin: 50px auto;
@@ -144,7 +146,7 @@ body{
 }
 
 .fa-volume-up, .fa-volume-off, .fa-volume-down{
-    z-index: 20;
+    z-index: 990;
     display: none;
     width: 60%;
     font-size: 75px;
@@ -158,37 +160,48 @@ body{
 }
 .middle_icons{
     z-index: 20;
+    text-align: center;
+    align-items: center;
     display: none;
     background-color: #FFF8DC;
     width: 60%;
     border: 5px solid black;
     border-radius: 30px;
     padding: 30px;
-    text-align: center;
-    margin: 20px auto;
 }
-.button_again, .button_close{
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
+.button_thumbs_up{
+
+    width: 80px;
+    height: 80px;
+    font-size: 70px;
     background-color: white;
 }
-.fa-close {
-    font-size: 40px;
-    color: red;
-
-}
-.fa-refresh{
-    font-size: 40px;
+.fa-thumbs-up{
     color: green;
+    font-size: 60px;
 }
 .tucniak_klavir, .pes_klavir{
     display: none;
-    z-index: -1;
+    z-index: -100;
 }
 .stars{
     position: absolute;
     display: none;
+}
+.nadoba{
+    width: 100px;
+    height: 200px;
+    bottom: 0;
+    top: 0;
+    margin-left: 60px;
+    margin-top: 90px;
+}
+.candy{
+    position: absolute;
+    width: 65px;
+    height: 30px;
+    margin-bottom: 80px;
+
 }
 
 

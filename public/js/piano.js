@@ -3,6 +3,7 @@ class Piano{
         this.notes = notes;
         this.root = "";
         this.played_tone = undefined;
+
     }
     create_piano(){
         let note_counter = 0;

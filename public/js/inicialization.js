@@ -7,6 +7,7 @@ let piano2_colorful = new Colorful_Piano(['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'
 let piano2_default = new Piano(['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'])
 let generate_tone = new Generate_Tone(['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4'])
 let generate_tone2 = new Generate_Tone(['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'])
+let displays = new Piano_Display();
 
 //html ids
 let container = document.getElementById('container');
@@ -28,55 +29,56 @@ let tucniak_klavir = document.getElementById('tucniak_klavir');
 let pes_klavir = document.getElementById('pes_klavir');
 
 //buttons id
-let button_again = document.getElementById('button_again');
-let button_close = document.getElementById('button_close');
+let button_thumbs_up = document.getElementById('thumbs_up');
+
 
 //booleans atd
 let button_arrow_active = false;
 let button_game_one = false;
+let score = 0;
+
+
+const rockets = [];
+const particles = [];
 
 
 
 //buttons-----------------------------------------------------
 function button1() {
     if(!created) {
-        btn_arrow.style.display = 'block';
-        container.style.display = "none";
+        displays.buttons_levels()
         created = true;
         piano1_colorful.create_piano();
-        if(button_game_one){play_game_one(piano1_colorful,0);}
+        if(button_game_one){play_game_one(piano1_colorful,0);add_empty_container_image();}
     }
 }
 
 function button2() {
     if (!created) {
-        btn_arrow.style.display = 'block';
-        container.style.display = "none";
+        displays.buttons_levels()
         created = true;
         piano1_default.create_piano();
-        if(button_game_one){play_game_one(piano1_default,0);}
+        if(button_game_one){play_game_one(piano1_default,0); add_empty_container_image();}
 
     }
 }
 
 function button3() {
     if (!created) {
-        btn_arrow.style.display = 'block';
-        container.style.display = "none";
+        displays.buttons_levels()
         created = true;
         piano2_colorful.create_piano();
-        if(button_game_one){play_game_one(piano2_colorful,0);}
+        if(button_game_one){play_game_one(piano2_colorful,0); add_empty_container_image();}
 
     }
 }
 
 function button4() {
     if (!created) {
-        btn_arrow.style.display = 'block';
-        container.style.display = "none";
+        displays.buttons_levels()
         created = true;
         piano2_default.create_piano();
-        if(button_game_one){play_game_one(piano2_default,0);}
+        if(button_game_one){play_game_one(piano2_default,0); add_empty_container_image();}
     }
 }
 function button5(){
@@ -91,9 +93,7 @@ function button5(){
 }
 function game_one_button(){
     button_game_one = true;
-   board1.style.display = "none";
-   board2.style.display = "block";
-   btn_arrow.style.display = "block";
+    displays.button_game_one();
 }
 
 
@@ -105,8 +105,8 @@ function game_one_button(){
 function play_game_one(piano, rounds_number) {
     middle_icon.style.display = 'none';
     let random_number = Math.floor(Math.random() * 4);
-    if (random_number < 2) display_tucniak_klavir(true);
-    else display_pes_klavir(true);
+    if (random_number < 2) displays.display_klavir_tucniak();
+    else displays.display_klavir_pes();
     button_arrow_active = false;
     let rounds = rounds_number;
     let number = 1;
@@ -118,7 +118,7 @@ function play_game_one(piano, rounds_number) {
     loopgame();
 
     function loopgame(){
-        if(button_arrow_active || rounds >= 5){
+        if(button_arrow_active || rounds >= 5 || score > 8){
             close_img_and_interval(interval);
             return;
         }
@@ -129,9 +129,9 @@ function play_game_one(piano, rounds_number) {
         }
         else{
             close_img_and_interval(interval);
-            middle_icon.style.display = 'flex';
-            button_again.onclick = function (){rounds = 0 ;play_game_one(piano, rounds)}
-            button_close.onclick = function (){piano_level_menu();}
+            middle_icon.style.display = 'block';
+            button_thumbs_up.onclick = function (){rounds = 0 ;play_game_one(piano, rounds)}
+
         }
     }
 }
@@ -157,104 +157,53 @@ function compare_generated_and_clicked(note, piano, interval){
     close_img_and_interval(interval);
     if(piano.return_played_tone() !== undefined){
         if(piano.return_played_tone() === note){
-            display_emoji_heart(true);
+            score++;
+            displays.display_emoji_heart();
             animate_stars();
-            setTimeout(function (){display_emoji_heart(false)}, 1500);
+            animate_candy();
+            setTimeout(function (){displays.close_emoji_heart()}, 1500);
+            piano.played_tone = undefined;
         }
         else {
-            display_emoji_sad(true);
-            setTimeout(function (){ display_emoji_sad(false);}, 1500);
+            displays.display_emoji_sad();
+            setTimeout(function (){ displays.close_emoji_sad()}, 1500);
         }
     }
     else {
-        display_emoji_sad(true);
-        setTimeout(function (){ display_emoji_sad(false);}, 1500);
-    }
-}
-function display_emoji_heart(display){
-    if(display){
-        emoji_heart.style.display = 'block';
-    }
-    else {
-        emoji_heart.style.display = 'none';
+        displays.display_emoji_sad();
+        setTimeout(function (){ displays.close_emoji_sad()}, 1500);
     }
 }
 
-function display_emoji_sad(display){
-    if(display){
-        emoji_sad.style.display = 'block';
-    }
-    else {
-        emoji_sad.style.display = 'none';
-    }
-}
 function set_sound_img(number_of_img, interval){
     if(button_arrow_active){
         close_img_and_interval(interval);
         return;
     }
-   container_middle.style.display = 'block';
-    if (number_of_img === 1) {
-        volume_off.style.display = 'block';
-        volume_up.style.display = 'none';
-        volume_down.style.display = 'none';
-    } else if (number_of_img === 2) {
-        volume_down.style.display = 'block';
-        volume_off.style.display = 'none';
-        volume_up.style.display = 'none';
-    } else if (number_of_img === 3) {
-        volume_up.style.display = 'block';
-        volume_down.style.display = 'none';
-        volume_off.style.display = 'none';
-    }
+    displays.set_sound_img(number_of_img);
 }
 function close_img_and_interval(interval){
-    display_tucniak_klavir(false);
-    display_pes_klavir(false);
+    displays.close_klavir_tucniak();
+    displays.close_klavir_pes();
     clearInterval(interval);
     interval = null;
-    stars.innerHTML = '';
-    middle_icon.style.display = 'none'
-    volume_off.style.display = 'none';
-    volume_up.style.display = 'none';
-    volume_down.style.display = 'none';
-}
-function display_middle_container(){
-    container_middle.style.display = 'block';
-}
-function display_container(){
-    created = false;
-    container.style.display = 'block';
-    container_down.innerHTML = '';
-}
-function display_board1(){
-    display_container();
-    board1.style.display = 'block';
-    board2.style.display = 'none';
-    btn_arrow.style.display = 'block';
-    created = false;
-}
-function display_board2(){
-    display_container();
-    board1.style.display = 'none';
-    board2.style.display = 'block';
+   displays.close_images_after_game_one()
+
 }
 
-function display_tucniak_klavir(display){
-    if(display){
-        tucniak_klavir.style.display = 'block';
-    }
-    else {
-        tucniak_klavir.style.display = 'none';
-    }
+function add_empty_container_image(){
+    var img = new Image();
+    img.src = "../obrazky/nadoba.png";
+    img.setAttribute('id', 'nadoba');
+    img.setAttribute('class', 'nadoba');
+    container_down.appendChild(img);
 }
-function display_pes_klavir(display){
-    if(display){
-        pes_klavir.style.display = 'block';
-    }
-    else {
-        pes_klavir.style.display = 'none';
-    }
+
+function change_img_container(number){
+    var img = document.getElementById('nadoba');
+    if(number === 0)  img.src = "../obrazky/nadoba.png"
+    else img.src = "../obrazky/nadoba" + number + ".png"
+
 }
 
 function piano_level_menu(){
@@ -263,56 +212,85 @@ function piano_level_menu(){
     btn_arrow.style.display = 'block';
     document.getElementById('container_down').innerHTML = "";
     created = false;
-    display_board2();
+    displays.display_board2();
 }
+
 function piano_game_menu(){
-    display_board1();
+    displays.display_board1();
 }
 
 function add_stars(){
+    stars.style.display = 'block';
+    var y = container_down.getBoundingClientRect().y;
     for (var i = 0; i < 10; i++) {
         var img = new Image();
-        img.src = "../obrazky/hviezda.png"
-        img.setAttribute('id', 'hviezda')
+        img.src = "../obrazky/hviezda.png";
+        img.setAttribute('id', 'hviezda' + i);
         img.style.width = '30px';
         img.style.height = '30px';
-        stars.appendChild(img)
+        stars.appendChild(img);
     }
 }
 
-function set_stars(){
-    stars.style.display = 'block';
-    const winWidth =  stars.offsetWidth;
-    const winHeight = stars.offsetHeight;
 
-    for (let i= 0; i < stars.children.length; i++ ) {
-        var thisStar = stars.children[i];
-        let randomTop = getRandomNumber(0, winHeight);
-        let randomLeft = getRandomNumber(0, winWidth);
-        thisStar.style.top = randomTop +"px";
-        thisStar.style.left = randomLeft +"px";
-    }
-}
-function getRandomNumber(min, max) {
-    return Math.random() * (max - min) + min;
-}
 
 function animate_stars(){
     add_stars();
-    set_stars()
-    stars.onanimationend = () => { stars.innerHTML = '';}
-    stars.animate(
+    for(let i = 0; i < 10; i++){
+        var star = document.getElementById('hviezda' + i)
+        let cislo = Math.floor(Math.random() * (500 - 100 + 1) + 500);
+
+        star.animate(
+            [
+                // keyframes
+                { transform: 'translateY(0px)'},
+                { transform: 'translateY('+ (-cislo)+'px)' }
+
+            ], {
+                // timing options
+                duration: 2000,
+                iterations: 1
+            }
+        )
+
+    }
+}
+function add_candy(){
+    var nadoba = document.getElementById('nadoba')
+    var x = nadoba.getBoundingClientRect().x;
+    var img = new Image();
+    img.src = "../obrazky/candy.png";
+    img.style.left = x + 'px';
+    img.setAttribute('id', 'candy');
+    img.setAttribute('class', 'candy');
+    container_middle.appendChild(img);
+}
+function remove_candy(){
+    let candy = document.getElementById('candy');
+    candy.parentNode.removeChild(candy);
+    change_img_container(score);
+}
+
+function animate_candy(){
+    add_candy();
+
+    let candy = document.getElementById('candy').animate(
         [
             // keyframes
             { transform: 'translateY(0px)' },
-            { transform: 'translateY(-300px)' }
+            { transform: 'translateY(500px)' }
         ], {
             // timing options
-            duration: 1000,
+            duration: 1500,
             iterations: 1
         }
     )
+
+    candy.play();
+    candy.finished.then(remove_candy);
 }
+
+
 
 
 
