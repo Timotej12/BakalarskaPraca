@@ -1,5 +1,6 @@
 body{
     background-image: url("../obrazky/obrazok1.jpg");
+    background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

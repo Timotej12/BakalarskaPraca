@@ -12,6 +12,11 @@
     <script src="../js/piano.js"></script>
     <script src="../js/Games/Generate_Tone.js"></script>
     <script src="../js/Displays/Piano_Display.js"></script>
+    <script src="../js/Games/Play_Random_Genareted_Tone.js"></script>
+    <script src="../js/Animations/Candy_Animation.js"></script>
+    <script src="../js/Animations/Stars_Animation.js"></script>
+    <script src="../js/Animations/Middle_Icon_Animation.js"></script>
+    <script src="../js/Animations/Hand_Animation.js"></script>
     <script src="../js/inicialization.js" defer></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,7 +25,7 @@
 
 </head>
 <body>
-<button class="button_back" id="btn5" type="button" value="4" onclick="button5()" style="display: none">&larr;</button>
+<button class="button_back" id="button_back" type="button" value="4" onclick="button_back()" >&larr;</button>
 <div class="container" id="container">
     <div class="board1" id="board1">
         <h5>Vyber hru</h5>
@@ -42,8 +47,8 @@
         <i class='emoji_heart' id="emoji_heart">&#128525;</i>
         <i class='emoji_sad' id="emoji_sad">&#128532;</i>
     </div>
-    <div class="middle_icons" id="middle_icons">
-        <button class="button_thumbs_up" id="button_thumbs_up"><i id="thumbs_up" class="fa fa-thumbs-up"></i></button>
+    <div  class="middle_icons" id="middle_icons">
+        <button type="button" class="button_thumbs_up" id="button_thumbs_up"><i id="thumbs_up" class="fa fa-thumbs-up"></i></button>
     </div>
     <div class="stars" id="stars">
     </div>
@@ -51,6 +56,7 @@
     <img src="../obrazky/obrazok4.png" alt="pes" id="pes_klavir" class="pes_klavir">
 </div>
 <div id="container_down">
+
 
 </div>
 </body>

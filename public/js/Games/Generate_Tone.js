@@ -9,8 +9,9 @@ class Generate_Tone{
     }
     play_tone(note){
         const synth = new Tone.Synth().toDestination();
-        const now = Tone.now()
-        synth.triggerAttack(note, now)
-        synth.triggerRelease(now + 0.25)
+        const now = Tone.now();
+        synth.triggerAttack(note, now);
+        synth.triggerRelease(now + 0.25);
     }
+
 }

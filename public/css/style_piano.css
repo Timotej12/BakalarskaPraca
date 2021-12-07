@@ -29,6 +29,7 @@ body{
 }
 .board1{
     font-size: 20px;
+    display: block;
 }
 .board2{
     font-size: 20px;
@@ -98,11 +99,12 @@ body{
 
 }
 
-.whitenote0{background-color: darkolivegreen}.whitenote1{background-color: chocolate} .whitenote2{background-color: brown} .whitenote3{background-color: darkgreen}
-.whitenote4{background-color: burlywood} .whitenote5{background-color: teal} .whitenote6{background-color: aquamarine} .whitenote7{background-color: darkmagenta}
-.whitenote8{background-color: lightcoral}.whitenote9{background-color: lightcoral}.whitenote10{background-color: lightcoral}.whitenote11{background-color: lightcoral}
-.whitenote12{background-color: lightcoral}.whitenote13{background-color: lightcoral} .whitenote14{background-color: lightcoral} .whitenote15{background-color: lightcoral}
-.whitenote0:active,.whitenote1:active,.whitenote2:active,.whitenote3:active,.whitenote4:active,.whitenote5:active, .whitenote6:active, .whitenote7:active{
+.whitenote0{background-color: #00FFFF}.whitenote1{background-color: #000080} .whitenote2{background-color: #008000} .whitenote3{background-color: #808000}
+.whitenote4{background-color: #008080} .whitenote5{background-color: #0000FF} .whitenote6{background-color: #00FF00} .whitenote7{background-color: #800080}
+.whitenote8{background-color: #FF00FF}.whitenote9{background-color: #800000}.whitenote10{background-color: #FF0000}.whitenote11{background-color: #FFFF00}
+.whitenote12{background-color: #CCCC00}.whitenote13{background-color: #FF8000} .whitenote14{background-color: lightcoral} .whitenote15{background-color: lightcoral}
+.whitenote0:active,.whitenote1:active,.whitenote2:active,.whitenote3:active,.whitenote4:active,.whitenote5:active, .whitenote6:active, .whitenote7:active,.whitenote8:active,
+.whitenote9:active, .whitenote10:active, .whitenote11:active, .whitenote12:active, .whitenote13:active, .whitenote14:active, .whitenote15:active, .whitenote16:active{
     background-color: gray;
     height: 270px;
 }
@@ -146,11 +148,14 @@ body{
 }
 
 .fa-volume-up, .fa-volume-off, .fa-volume-down{
-    z-index: 990;
+    z-index: 999;
+    margin-right: 0;
+    margin-left: 0;
+    position: absolute;
     display: none;
     width: 60%;
     font-size: 75px;
-    margin: 20px auto auto;
+    /*margin: 20px auto auto;*/
 }
 .emoji_heart, .emoji_sad{
     z-index: 20;
@@ -167,22 +172,28 @@ body{
     width: 60%;
     border: 5px solid black;
     border-radius: 30px;
-    padding: 30px;
 }
 .button_thumbs_up{
-
-    width: 80px;
-    height: 80px;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
     font-size: 70px;
-    background-color: white;
+    padding: 0;
+    border: none;
+    background: none;
 }
 .fa-thumbs-up{
     color: green;
-    font-size: 60px;
+    font-size: 70px;
+    justify-content: center;
+    padding: 40px 40px 40px 40px;
 }
 .tucniak_klavir, .pes_klavir{
+    z-index: -999;
+    margin-right: 0;
+    margin-left: 0;
     display: none;
-    z-index: -100;
+    position: absolute;
 }
 .stars{
     position: absolute;

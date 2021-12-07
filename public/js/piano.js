@@ -63,6 +63,19 @@ class Piano{
     return_played_tone(){
         return this.played_tone;
     }
+    add_empty_container_image(){
+        var img = new Image();
+        img.src = "../obrazky/nadoba.png";
+        img.setAttribute('id', 'nadoba');
+        img.setAttribute('class', 'nadoba');
+        container_down.appendChild(img);
+    }
+    change_img_container(number){
+        var img = document.getElementById('nadoba');
+        if(number === 0)  img.src = "../obrazky/nadoba.png"
+        else img.src = "../obrazky/nadoba" + number + ".png"
+
+    }
 }
 
 class Colorful_Piano extends Piano{
@@ -123,6 +136,13 @@ class Colorful_Piano extends Piano{
     }
     return_played_tone() {
         return super.return_played_tone();
+    }
+    add_empty_container_image() {
+        super.add_empty_container_image();
+    }
+
+    change_img_container(number) {
+        super.change_img_container(number);
     }
 }
 
