@@ -14,8 +14,9 @@ class Piano_Display{
         this.volume_off = document.getElementById('volume_off');
         this.volume_up = document.getElementById('volume_up');
         this.volume_down = document.getElementById('volume_down');
-        this.emoji_heart = document.getElementById('emoji_heart');
-        this.emoji_sad = document.getElementById('emoji_sad');
+        this.happy_emoji1 = document.getElementById('happy1');
+        this.happy_emoji2 = document.getElementById('happy2');
+        this.sad_emoji = document.getElementById('sad');
         this.tucniak_klavir = document.getElementById('tucniak_klavir');
         this.pes_klavir = document.getElementById('pes_klavir');
         this.nadoba = document.getElementById('nadoba');
@@ -33,19 +34,21 @@ class Piano_Display{
     }
 
     button_back(){
-        this.middle_icon.style.display = 'none';
-        if( this.container.style.display === 'none') {
+        var style_of_container = window.getComputedStyle(this.container);
+        var style_of_board1 = window.getComputedStyle(this.board1);
+        var style_of_board2 =  window.getComputedStyle(this.board2);
+        if(style_of_container.display === "none"){
             this.display_piano_level_menu();
         }
-
-        else if(this.container.style.display === 'block' && this.board2.style.display === 'block' && this.board1.style.display === 'none' ) {
+        else if(style_of_container.display === 'block' && style_of_board2.display === 'block' && style_of_board1.display === 'none' ) {
             this.display_board1();
         }
-        else if(this.container.style.display === 'block' && this.board2.style.display === 'none' && this.board1.style.display === 'block'){
-            window.location.replace("http://localhost:3000/");
+        else if(style_of_container.display === 'block' && style_of_board2.display === 'none' && style_of_board1.display === 'block'){
+                 window.location.replace("http://localhost:3000/"); //http://localhost:3000/
         }
     }
     display_piano_level_menu(){
+        console.log("Zobrazujem piano level menu")
         this.middle_icon.style.display = 'none';
         this.btn_arrow.style.display = 'block';
         this.container_down.innerHTML = '';
@@ -61,6 +64,7 @@ class Piano_Display{
     }
 
     display_board1(){
+        console.log("Zobrazujem board1");
         this.display_container();
         this.board1.style.display = 'block';
         this.board2.style.display = 'none';
@@ -92,26 +96,28 @@ class Piano_Display{
     }
     display_middle_icons(){
         this.middle_icon.style.display = 'block';
-        this.button_thumbs_up.style.width= this.middle_icon.getBoundingClientRect().width - 5 + "px" ;
-        this.button_thumbs_up.style.height = this.middle_icon.getBoundingClientRect().height + "px";
-
     }
 
     close_middle_icons(){
         this.middle_icon.style.display = 'none';
     }
 
-    display_emoji_heart(){
-        this.emoji_heart.style.display = 'block';
+    display_random_happy_emoji(){
+        let random_number = Math.floor(Math.random() * 4);
+        if (random_number < 2) this.happy_emoji1.style.display = "block";
+        else this.happy_emoji2.style.display = "block";
     }
-    close_emoji_heart(){
-        this.emoji_heart.style.display = 'none';
+
+    close_happy_emoji(){
+        this.happy_emoji1.style.display = "none";
+        this.happy_emoji2.style.display = "none";
     }
-    display_emoji_sad(){
-        this.emoji_sad.style.display = 'block';
+
+    display_sad_emoji(){
+        this.sad_emoji.style.display = "block";
     }
-    close_emoji_sad(){
-        this.emoji_sad.style.display = 'none';
+    close_sad_emoji(){
+        this.sad_emoji.style.display = "none";
     }
     close_images_after_game_one(){
         this.close_klavir_tucniak();

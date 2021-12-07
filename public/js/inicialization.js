@@ -19,7 +19,7 @@ let board1 = document.getElementById("board1");
 let board2 = document.getElementById("board2");
 let container_down = document.getElementById('container_down');
 let container_middle = document.getElementById('container_middle');
-let btn_arrow = document.getElementById('button_back');
+let btn_back = document.getElementById('button_back');
 let middle_icon = document.getElementById('middle_icons');
 
 
@@ -60,22 +60,7 @@ function button4() {
         if(button_game_one){play_game_one_default(piano2_default, generate_tone2);}
 }
 function button_back(){
-    console.log("ciciic")
-    score = 0;
-    if(this.container.style.display === "none") {
-        console.log("tu")
-        this.display_piano_level_menu();
-    }
-
-    else if(this.container.style.display === "block" && this.board2.style.display === "block" && this.board1.style.display === "none" ) {
-        this.display_board1();
-        console.log("tu1")
-    }
-    else if(this.container.style.display === "block" && this.board2.style.display === "none" && this.board1.style.display === "block"){
-        window.location.replace("http://localhost:3000/");
-        console.log("tu2")
-    }
-
+    displays.button_back()
 }
 function game_one_button(){
     button_game_one = true;

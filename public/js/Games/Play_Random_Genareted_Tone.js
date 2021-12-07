@@ -40,11 +40,6 @@ class Play_Random_Genareted_Tone_Default{
                     index_of_image += 1;
                 }
                 , 500);
-            if (score > 8 || this.rounds > 10) {
-                this.end_game(this.interval)
-                this.close_interval(this.interval)
-                displays.display_piano_level_menu()
-            }
             this.rounds++;
             if(this.rounds <= 1) {
                 this.displays.random_display_pes_tucniak();
@@ -134,10 +129,10 @@ class Play_Random_Genareted_Tone_Default{
         else {
             this.play_note_again = false;
             this.score++;
-            this.displays.display_emoji_heart();
+            this.displays.display_random_happy_emoji();
             this.stars.animate_stars();
             this.candy.animate_candy(this.score);
-            setTimeout(() => this.displays.close_emoji_heart(), 1500);
+            setTimeout(() => this.displays.close_happy_emoji(), 1500);
             this.piano.played_tone = undefined;
         }
     }
@@ -150,8 +145,8 @@ class Play_Random_Genareted_Tone_Default{
         else {
             this.note = generate_tone.note;
             this.play_note_again = true;
-            this.displays.display_emoji_sad();
-            setTimeout(() => this.displays.close_emoji_sad(), 1500);
+            this.displays.display_sad_emoji();
+            setTimeout(() => this.displays.close_sad_emoji(), 1500);
             this.piano.played_tone = undefined;
         }
     }
@@ -209,39 +204,31 @@ class Play_Random_Genareted_Tone_Default{
 
 
 class Play_Random_Generated_Tone_Colorful extends Play_Random_Genareted_Tone_Default{
-    constructor(piano, generate_tone, display, stars, candy, mid_animation) {
-        super(piano, generate_tone, display, stars, candy, mid_animation);
+    constructor(piano, generate_tone, display, stars, candy, mid_animation, hand_anim) {
+        super(piano, generate_tone, display, stars, candy, mid_animation, hand_anim);
     }
     start_game() {
-        if(this.btn_back_active) {
-            this.close_img_and_interval(this.interval)
+        this.generate_tone.random_tone();
+        let note = this.generate_tone.note;
+        displays.close_middle_icons();
+        let index_of_image = 1;
+        if(this.play_note_again){
+            note = this.note;
+        }
+        this.interval = setInterval(function () {
+                if (index_of_image > 3) index_of_image = 1;
+                displays.set_sound_img_colorful(note,index_of_image);
+                index_of_image += 1;
+            }
+            , 500);
+        this.rounds++;
+        if(this.rounds <= 1) {
+            this.displays.random_display_pes_tucniak();
+            setTimeout(() => this.play_generated_tone(this.interval), 3000);
         }
         else {
-            this.generate_tone.random_tone();
-            let note = this.generate_tone.note;
-            displays.close_middle_icons();
-            let index_of_image = 1;
-            if(this.play_note_again){
-                note = this.note;
-            }
-            this.interval = setInterval(function () {
-                    if (index_of_image > 3) index_of_image = 1;
-                    displays.set_sound_img_colorful(note,index_of_image);
-                    index_of_image += 1;
-                }
-                , 500);
-            if (score > 9 || this.rounds > 10) {
-                this.end_game(this.interval)
-            }
-            this.rounds++;
-            if(this.rounds <= 1) {
-                this.displays.random_display_pes_tucniak();
-                setTimeout(() => this.play_generated_tone(this.interval), 3000);
-            }
-            else {
-                this.displays.random_display_pes_tucniak();
-                setTimeout(() => this.play_generated_tone(this.interval), 500);
-            }
+            this.displays.random_display_pes_tucniak();
+            setTimeout(() => this.play_generated_tone(this.interval), 500);
         }
     }
 
@@ -272,6 +259,32 @@ class Play_Random_Generated_Tone_Colorful extends Play_Random_Genareted_Tone_Def
 
 
 /*
+ this.generate_tone.random_tone();
+            let note = this.generate_tone.note;
+            displays.close_middle_icons();
+            let index_of_image = 1;
+            if(this.play_note_again){
+                note = this.note;
+            }
+            this.interval = setInterval(function () {
+                    if (index_of_image > 3) index_of_image = 1;
+                    displays.set_sound_img_colorful(note,index_of_image);
+                    index_of_image += 1;
+                }
+                , 500);
+            if (score > 9 || this.rounds > 10) {
+                this.end_game(this.interval)
+            }
+            this.rounds++;
+            if(this.rounds <= 1) {
+                this.displays.random_display_pes_tucniak();
+                setTimeout(() => this.play_generated_tone(this.interval), 3000);
+            }
+            else {
+                this.displays.random_display_pes_tucniak();
+                setTimeout(() => this.play_generated_tone(this.interval), 500);
+            }
+        }
 play_generated_tone(interval){
     if(this.btn_back_active) {
         this.close_img_and_interval(interval)

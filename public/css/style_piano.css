@@ -157,11 +157,12 @@ body{
     font-size: 75px;
     /*margin: 20px auto auto;*/
 }
-.emoji_heart, .emoji_sad{
-    z-index: 20;
+.sad, .happy1, .happy2{
+    margin-right: 0;
+    margin-left: 0;
     display: none;
-    font-size: 75px;
-    margin: 20px auto auto;
+    height: 150px;
+    width: 150px;
 }
 .middle_icons{
     z-index: 20;
@@ -174,11 +175,10 @@ body{
     border-radius: 30px;
 }
 .button_thumbs_up{
-    justify-content: center;
     width: 120px;
     height: 120px;
     font-size: 70px;
-    padding: 0;
+   padding: 0;
     border: none;
     background: none;
 }
