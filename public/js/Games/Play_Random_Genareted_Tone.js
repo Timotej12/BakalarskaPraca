@@ -31,6 +31,7 @@ class Play_Random_Genareted_Tone_Default{
             this.close_img_and_interval(this.interval);
         }
         else {
+            this.piano.played_tone = undefined;
             this.generate_tone.random_tone();
             displays.close_middle_icons();
             let index_of_image = 1;
@@ -64,7 +65,8 @@ class Play_Random_Genareted_Tone_Default{
                 console.log(this.note);
                 this.interval2 = setInterval(() =>{
                     if(this.piano.played_tone === undefined){
-                        this.hand_anim.animate_hand(generate_tone.note)
+                        console.log("Toto si tam posielam riadok 68 ", this.note);
+                        this.hand_anim.animate_hand(this.note)
                     }
                     else {
                         this.hand_anim.remove_hand()
@@ -73,7 +75,7 @@ class Play_Random_Genareted_Tone_Default{
                 }, 6000);
                 this.interval3 = setInterval(() =>{
                     if(this.piano.played_tone !== undefined){
-                        this.compare_generated_and_played_tone(this.piano.played_tone, this.generate_tone.note, interval);
+                        this.compare_generated_and_played_tone(this.piano.played_tone, this.note, interval);
                         this.close_interval(this.interval2);
                         this.close_interval(this.interval3);
                         this.hand_anim.remove_hand();
@@ -86,7 +88,7 @@ class Play_Random_Genareted_Tone_Default{
                 console.log(this.generate_tone.note);
                 this.interval2 = setInterval(() =>{
                     if(this.piano.played_tone === undefined){
-                        this.hand_anim.animate_hand(generate_tone.note)
+                        this.hand_anim.animate_hand(this.generate_tone.note)
                     }
                     else {
                         this.hand_anim.remove_hand()
@@ -122,6 +124,7 @@ class Play_Random_Genareted_Tone_Default{
     }
 
     won_round(){
+        this.generate_tone.generated_tones.push(this.piano.played_tone);
         this.piano.played_tone = undefined;
         if(this.btn_back_active) {
             this.close_img_and_interval(this.interval)
@@ -208,6 +211,7 @@ class Play_Random_Generated_Tone_Colorful extends Play_Random_Genareted_Tone_Def
         super(piano, generate_tone, display, stars, candy, mid_animation, hand_anim);
     }
     start_game() {
+        this.piano.played_tone = undefined;
         this.generate_tone.random_tone();
         let note = this.generate_tone.note;
         displays.close_middle_icons();
@@ -257,63 +261,4 @@ class Play_Random_Generated_Tone_Colorful extends Play_Random_Genareted_Tone_Def
 }
 
 
-
-/*
- this.generate_tone.random_tone();
-            let note = this.generate_tone.note;
-            displays.close_middle_icons();
-            let index_of_image = 1;
-            if(this.play_note_again){
-                note = this.note;
-            }
-            this.interval = setInterval(function () {
-                    if (index_of_image > 3) index_of_image = 1;
-                    displays.set_sound_img_colorful(note,index_of_image);
-                    index_of_image += 1;
-                }
-                , 500);
-            if (score > 9 || this.rounds > 10) {
-                this.end_game(this.interval)
-            }
-            this.rounds++;
-            if(this.rounds <= 1) {
-                this.displays.random_display_pes_tucniak();
-                setTimeout(() => this.play_generated_tone(this.interval), 3000);
-            }
-            else {
-                this.displays.random_display_pes_tucniak();
-                setTimeout(() => this.play_generated_tone(this.interval), 500);
-            }
-        }
-play_generated_tone(interval){
-    if(this.btn_back_active) {
-        this.close_img_and_interval(interval)
-    }
-    else {
-        if(this.play_note_again){
-            this.generate_tone.play_tone(this.note);
-            console.log(this.note);
-            if(this.piano.return_played_tone() !== undefined){
-                this.compare_generated_and_played_tone(this.piano.played_tone, this.note, interval);
-            }
-            else{
-                setTimeout(() => this.compare_generated_and_played_tone(this.piano.played_tone, this.note, interval), 4000);
-            }
-        }
-        else {
-            this.play_note_again = false;
-            this.generate_tone.play_tone(this.generate_tone.note);
-            console.log(this.generate_tone.note);
-            if(this.piano.return_played_tone() !== undefined){
-                this.compare_generated_and_played_tone(this.piano.played_tone, this.generate_tone.note, interval);
-            }
-            else{
-                setTimeout(() => this.compare_generated_and_played_tone(this.piano.played_tone, this.generate_tone.note, interval), 4000);
-            }
-        }
-
-    }
-}
-
- */
 

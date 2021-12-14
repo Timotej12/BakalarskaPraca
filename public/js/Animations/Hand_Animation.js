@@ -4,6 +4,7 @@ class Hand_Animation{
     add_hand(generate_tone){
         let container_down = document.getElementById('container_down');
         if(container_down){
+            console.log("Tento ton si sem posielam " +  generate_tone)
             var img = new Image();
             img.src = "../obrazky/hand.png";
             img.setAttribute('id', 'hand');
@@ -23,7 +24,8 @@ class Hand_Animation{
         for(var i = 0; i < children.length; i++) {
             var child = children[i];
             if (child.getAttribute('data-note') === generate_tone) {
-                let y = child.getBoundingClientRect().height / 4
+                let y = child.getBoundingClientRect().height / 10
+                console.log("Toto je moje y" + y);
                 return y
             }
         }
@@ -37,11 +39,13 @@ class Hand_Animation{
             if(child.getAttribute('data-note') === generate_tone) {
                 let num = child.getBoundingClientRect().width
                 let index = this.get_number_of_tone(generate_tone)
+                console.log("Toto je moje num a index " +  num + " " + index);
+
                 if(index === 0){
-                    return num;
+                    return num / 4;
                 }
                 else {
-                    return num * index;
+                    return num * index + 5;
                 }
             }
         }

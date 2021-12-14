@@ -8,6 +8,7 @@ class Piano{
     create_piano(){
         let note_counter = 0;
         const div_container = document.getElementById('container_down');
+        if(div_container.getBoundingClientRect().width )
         if(this.notes.length < 10){
             div_container.style.left = '70%';
         }
@@ -43,12 +44,20 @@ class Piano{
                 this.root.setAttribute('data-note',note + '#' + 4);
                 this.root.addEventListener("mousedown", this.noteDown.bind(this , this.root.getAttribute("data-note")));
 
-
-                if(counter < 3 ){
-                    this.root.style.right = 'calc(1200px - (' + counter + '* 80px) - 10px)';
+                if(this.notes.length < 10) {
+                    if (counter < 3) {
+                        this.root.style.right = 'calc(1200px - (' + counter + '* 80px) - 10px)';
+                    } else {
+                        this.root.style.right = 'calc(1200px - (' + counter + '* 78.5px) - 10px)';
+                    }
                 }
                 else {
-                    this.root.style.right = 'calc(1200px - (' + counter + '* 78.5px) - 10px)';
+                    if (counter < 3) {
+                        this.root.style.right = 'calc(1200px - (' + counter + '* 70px) - 10px)';
+                    }
+                  else  {
+                        this.root.style.right = 'calc(1200px - (' + counter + '* 69.5px) - 10px)';
+                    }
                 }
                 div_container.appendChild(this.root)
             }
@@ -121,11 +130,20 @@ class Colorful_Piano extends Piano{
                 this.root.addEventListener("mousedown", this.noteDown.bind(this , this.root.getAttribute("data-note")));
 
 
-                if(counter < 3 ){
-                    this.root.style.right = 'calc(1200px - (' + counter + '* 80px) - 10px)';
+                if(this.notes.length < 10) {
+                    if (counter < 3) {
+                        this.root.style.right = 'calc(1200px - (' + counter + '* 80px) - 10px)';
+                    } else {
+                        this.root.style.right = 'calc(1200px - (' + counter + '* 78.5px) - 10px)';
+                    }
                 }
                 else {
-                    this.root.style.right = 'calc(1200px - (' + counter + '* 78.5px) - 10px)';
+                    if (counter < 3) {
+                        this.root.style.right = 'calc(1200px - (' + counter + '* 70px) - 10px)';
+                    }
+                    else  {
+                        this.root.style.right = 'calc(1200px - (' + counter + '* 69.5px) - 10px)';
+                    }
                 }
                 div_container.appendChild(this.root)
             }

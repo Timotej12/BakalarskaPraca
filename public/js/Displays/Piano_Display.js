@@ -44,11 +44,10 @@ class Piano_Display{
             this.display_board1();
         }
         else if(style_of_container.display === 'block' && style_of_board2.display === 'none' && style_of_board1.display === 'block'){
-                 window.location.replace("http://localhost:3000/"); //http://localhost:3000/
+                 window.location.replace("http://localhost:3000/");
         }
     }
     display_piano_level_menu(){
-        console.log("Zobrazujem piano level menu")
         this.middle_icon.style.display = 'none';
         this.btn_arrow.style.display = 'block';
         this.container_down.innerHTML = '';
@@ -64,7 +63,6 @@ class Piano_Display{
     }
 
     display_board1(){
-        console.log("Zobrazujem board1");
         this.display_container();
         this.board1.style.display = 'block';
         this.board2.style.display = 'none';

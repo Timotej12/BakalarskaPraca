@@ -215,4 +215,29 @@ body{
 
 }
 
+@media only screen and (max-width: 800px) {
+    .container_down {
+        position: fixed;
+        display: flex;
+        max-width:800px;
+        height:300px;
+        margin-left: 100px;
+        bottom:0;
+    }
+    .whitenote{
+        position: relative;
+        overflow: hidden;
+        z-index: 0;
+        display: flex;
+        background: #fff;
+        width: 70px;
+        height: 280px;
+        border: 1px solid black;
+        border-radius: 0 0 5px 5px;
+        margin: 0 -2px;
+        transition: background-color 50ms ease,box-shadow 50ms ease;
+    }
+
+}
+
 
